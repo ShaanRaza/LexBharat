@@ -1,7 +1,7 @@
 # KanoonBuddy Website: Design Doc (v2)
 
 **Date:** 9 Oct 2026
-**Product:** Legal research AI for Indian courts. Launch scope: Supreme Court, Delhi, Bombay and Madras High Courts, Central Acts.
+**Product:** Legal research AI for Indian courts. Launch scope: Supreme Court and Central Acts only. High Courts are phase 2 (the PRD names Bombay, Telangana and Kerala, pending confirmation), added when paying users cover the server cost.
 **Change from v1:** v1 had 12 technical sections and a black and white theme. v2 is simple and consumer friendly: one search bar, one orange accent, three pages.
 
 ## 1. Goal
@@ -29,7 +29,7 @@ Nav: logo, Features, Pricing, "Get early access". Sticky at the top. Footer carr
 
 ## 5. Features shown
 - **Ask a legal question:** plain answer with the law behind it.
-- **Find a judgment:** Supreme Court and High Court cases, with the key paragraph.
+- **Find a judgment:** Supreme Court cases, with the key paragraph. High Courts come in phase 2.
 - **Old law to new law:** IPC, CrPC and Evidence Act section to its new BNS, BNSS or BSA section.
 
 ## 6. Visual system
