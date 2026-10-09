@@ -69,12 +69,19 @@ Actions deploys to the server.
 > `gh auth refresh -h github.com -s workflow`, or add the workflow through the GitHub web
 > UI once.
 
-| Job | Runs |
-|---|---|
-| Lint and type check | Every push |
-| Unit + integration tests | Every push |
-| Dependabot | Scheduled |
-| 200-question test set | Every release, from the admin page |
+| Workflow | Job | Runs | State today |
+|---|---|---|---|
+| `ci.yml` | **hygiene** — `.env` not committed, Markdown links resolve | Every push and PR | Active |
+| `ci.yml` | **python** — ruff lint, format check, pytest | Every push and PR | Skips until `pyproject.toml` exists (build step 2) |
+| `ci.yml` | **web** — lint, `tsc --noEmit`, build | Every push and PR | Skips until `web/package.json` exists (build step 4) |
+| `deploy.yml` | Deploy to the Mumbai server | **Manual dispatch only** | Skeleton — steps commented out until build step 6 |
+| `dependabot.yml` | Dependency updates (actions, pip, npm, docker) | Weekly | Active; finds nothing until manifests exist |
+
+The detect-then-skip pattern is deliberate: CI that is red from day one gets ignored. Each
+job turns itself on when its manifest appears.
+
+The **200-question test set** runs separately, from the admin page, on every release — not
+in CI, because it costs real money per run.
 
 ## Separate hand checks (not automated)
 

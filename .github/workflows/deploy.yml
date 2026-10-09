@@ -1,0 +1,68 @@
+# Deploy to the single EC2 server in Mumbai.
+#
+# SKELETON — manual dispatch only, on purpose. The server does not exist yet
+# (build step 6). Switch the `push` trigger on only once the server is up and
+# every secret below is set.
+#
+# Rule: coding agents never touch the production server directly. Push to
+# GitHub; this workflow deploys.
+
+name: Deploy
+
+on:
+  workflow_dispatch:
+  # Uncomment at build step 6, once the server and secrets exist:
+  # push:
+  #   branches: [main]
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to production
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required secrets are set
+        env:
+          HOST: ${{ secrets.DEPLOY_HOST }}
+          USER: ${{ secrets.DEPLOY_USER }}
+          KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          missing=0
+          for v in HOST USER KEY; do
+            if [ -z "${!v}" ]; then
+              echo "::error::Secret DEPLOY_$v is not set."
+              missing=1
+            fi
+          done
+          if [ "$missing" = "1" ]; then
+            echo "Set these in Settings > Secrets and variables > Actions, then re-run."
+            exit 1
+          fi
+
+      # Everything below is the intended shape, not yet exercised.
+      #
+      # - name: SSH and roll the stack
+      #   run: |
+      #     ssh "$USER@$HOST" '
+      #       cd /srv/app &&
+      #       git pull --ff-only &&
+      #       docker compose -f infra/docker-compose.yml pull &&
+      #       docker compose -f infra/docker-compose.yml up -d --remove-orphans &&
+      #       docker compose -f infra/docker-compose.yml exec -T api alembic upgrade head
+      #     '
+      #
+      # - name: Smoke test
+      #   run: |
+      #     curl -fsS "https://$HOST/api/v1/healthz"
+      #
+      # Images must be built for ARM (Graviton r7g).
+      - name: Not wired up yet
+        run: |
+          echo "Deploy steps are commented out until build step 6."
+          echo "See docs/BUILD-ORDER.md and docs/RUNBOOK.md."
