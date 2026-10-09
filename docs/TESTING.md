@@ -31,7 +31,17 @@ release.
 
 ## The 200-question test set
 
-Lives in [`../evals/`](../evals/) with its scorer.
+Lives in [`../evals/`](../evals/) with its scorer. **Frozen**, so results compare release
+to release, and **signed off by the advocate advisor before it is used**.
+
+| Part | Count |
+|---|---|
+| Real questions collected in the validation interviews | 100 |
+| Act and section lookups | 50 |
+| **Traps** — cases that do not exist, wrong section numbers, events after the snapshot date | **50** |
+
+The 50 traps are what prove the verifier and the out-of-scope detection actually work.
+**Do not drop them to raise the score.**
 
 | Metric | Target |
 |---|---|
@@ -46,6 +56,25 @@ Lives in [`../evals/`](../evals/) with its scorer.
 The set is also how every threshold gets set rather than guessed: the **Jev gate threshold
 (0.6 to start)**, and each `JEV_ENABLED_*` switch, which turns on for users **only once it
 beats the version without it**.
+
+Full metric definitions and owners: [METRICS.md](METRICS.md).
+
+## Continuous integration
+
+GitHub Actions runs on every push (`.github/workflows/`). **Never deploy from a laptop** —
+Actions deploys to the server.
+
+> **Before adding the first workflow:** the GitHub token in use must have the `workflow`
+> scope, or the push is rejected. Re-authorise with
+> `gh auth refresh -h github.com -s workflow`, or add the workflow through the GitHub web
+> UI once.
+
+| Job | Runs |
+|---|---|
+| Lint and type check | Every push |
+| Unit + integration tests | Every push |
+| Dependabot | Scheduled |
+| 200-question test set | Every release, from the admin page |
 
 ## Separate hand checks (not automated)
 

@@ -44,6 +44,8 @@ The tick is the core trust claim, so it states only what the checks can prove.
 | Words in quotation marks appear in that record's text | The quoted passage is the holding, or that the AI's summary of it is right |
 | The link goes to the record's `pdf_url` (judgments) or `source_url` (Acts) | The link works today, or the text is current law. The data is a snapshot (**v2026.08**) |
 | A citation string, if stored, is shown exactly as recorded | The citation string is correct or complete. Filled for **100% of Supreme Court chunks and 0% of High Court chunks** (Measured), so High Court answers will show none |
+| The cited passage was retrieved for this question, so the AI cannot cite a record it never saw | **That other relevant cases were not missed.** The verifier says nothing about recall |
+| Jev rates the passage as supporting the sentence it is cited for | **That a lawyer reviewed the point.** Jev is a model check and can be wrong |
 
 **Wording shown to users:** "Record found in dataset", with the data-as-of date and a short
 link to this definition.

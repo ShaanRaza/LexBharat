@@ -8,6 +8,34 @@ evidence, and note it in the commit.
 
 ---
 
+## Top 5 questions to answer before writing code
+
+Ranked by how much the answer would change the plan. **None is answered by the dataset;
+each needs a person, a hand check or a lawyer.**
+
+| # | Question | What answers it | What it would change |
+|---|---|---|---|
+| 1 | **Will advocates and students pay, and how much?** | The 20 validation interviews | If the answer is "not at these prices", pricing and the whole go-to-market change |
+| 2 | **Does `disposition` describe the final outcome or an interlocutory order?** | The 100-judgment hand check (50 SC, 50 HC) in weeks 1–2 | The SC half can clear SC statistics on its own; if the HC half shows a mix, **High Court statistics cannot ship** |
+| 3 | **How do the first 100 users find us?** | A yes or no from at least two law schools on a pilot, and a test of whether free indexed pages get search traffic | **Without distribution, the product does not matter** |
+| 4 | Who builds it, and what is the budget? | **Decided: one solo builder with AI coding agents.** Time build steps 1 and 2, then re-plan | The weeks 3–10 schedule fits only the 3-engineer plan |
+| 5 | **What do counsel and Vaquill say?** | A lawyer on privilege, the DPDP role and the advice line; Vaquill on the three questions in [DATASET.md](DATASET.md) | Either conversation can force a scope change |
+
+### Other open questions
+
+- Voyage per-query cost and monthly budget on real questions (build step 2).
+- Is the chunk gap ~55,000 or ~1.15M? Needs the weeks 1–2 count, parquet versus Qdrant.
+- Hindi-first or English-first for the interface and answers?
+- Trademark search on the final name **and** the five alternatives, before any branding spend.
+- Monthly LLM budget per paying user — measure on the 200-question test set.
+- Whether to extract tribunal data after launch (OCR effort, not licensing).
+- Who cleans the High Courts' 577 disposition values, and to what standard? Phase 2.
+- Will TypeSafe grant Jev early access and confirm no-training terms in writing?
+- Supreme Court point count and server size — does SC + `acts_india` fit on r7g.large (16 GB)?
+- Firebase or Supabase — stay until a trigger is hit; decide at each trigger.
+
+---
+
 ## Settled
 
 | # | Decision | Choice | Why |
@@ -55,6 +83,8 @@ evidence, and note it in the commit.
 | **Which notes beyond the first set** | Grow by topic, or only where answers go wrong | Only where answers go wrong | Wrong-answer reports and test-set failures |
 | **Who reviews knowledge notes** | Advocate advisor, or a paid one-off reviewer | Advocate advisor | Quote for reviewing the law maps |
 | **Interface language** | Hindi-first or English-first | Open (from the PRD) | The 20 interviews |
+| **Plan prices** | Free ₹0 / Student ₹199 / Pro ₹499 / Chambers ₹299 per user | Proposed, **untested** — no lawyer has been asked | The 20 interviews; see the evidence table in [PRODUCT.md](PRODUCT.md) |
+| **Monthly answer limits per plan** | Undecided | Undecided | Measured cost per answer from the week-1 test, set so a heavy user still leaves a margin |
 | **Naming an advocate advisor publicly** | Counts as publicity under BCI Rule 36? | Unknown | Needs counsel |
 
 ---
@@ -69,3 +99,14 @@ evidence, and note it in the commit.
 **Resolved 9 Oct 2026: the PRD is correct.** The website design doc was corrected in this
 repo. Delhi and Madras appear nowhere in the PRD's phase-2 list — if the website copy came
 from a third source, that source is also wrong.
+
+### Second conflict: Pro price
+
+| Doc | Pro price |
+|---|---|
+| PRD, p.37 | **₹499 a month** (₹4,990 a year) |
+| Website Design Doc v2, pre-launch checklist | ₹799, explicitly labelled a **sample** pending confirmation |
+
+The design doc flags its own figure as a sample, so this is a placeholder that was never
+updated rather than a contradiction of record — but the PRD already proposes a real number.
+**Not changed in this repo pending a decision**, because ₹499 is itself untested.

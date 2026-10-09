@@ -1,0 +1,63 @@
+# User-facing copy and states
+
+The exact wording the product shows. These strings carry the trust promise and the legal
+position, so **do not improvise them in code**. Keep them in one place, versioned, and
+change them deliberately.
+
+Headline and marketing copy are **not** here — the headline is still a placeholder.
+
+## Failure and edge states
+
+Every one of these must exist before launch. "Nothing is guessed" is the rule in all of
+them.
+
+| Situation | What the user sees | What it costs |
+|---|---|---|
+| **No relevant results** | "No matching judgments found in our dataset (data as of the snapshot date)." Plus suggestions to rephrase or use Act lookup. **No written answer is generated, so nothing is invented** | One search call, no LLM call |
+| **Voyage API is down** | A notice that meaning-based search is unavailable. Act lookup, outcome statistics and keyword search still work and are labelled **"keyword results only"**. A retry button | No Voyage call |
+| **A judgment is longer than the model can read** | "This judgment is too long to read in full. Answering from the most relevant parts." The parts used are listed, and the user can ask about a page range | Needs verification: measure the longest judgments against the model's limit |
+| **An upload is an unreadable scan** | "We could not read this file. Try a clearer scan or paste the text." Nothing is guessed. **The usage meter is not charged** | OCR attempt only |
+| **The dataset has no coverage of the question** | "Version 1 covers Supreme Court judgments and central and state Acts and regulations. It does not include High Courts, district courts, tribunals, or judgments after the snapshot date." Points to the official court site | No LLM call if detected early |
+| **The LLM provider fails or times out** | The retrieved sources are shown **with links but no written answer**, and the user can retry | Retrieval cost only |
+| **The verifier rejects a cited authority** | The answer is shown with that citation removed and a note saying one authority could not be verified. The failure is written to `invented_citation_log` | Free |
+
+## The verification badge
+
+**Shown wording:** "Record found in dataset", with the data-as-of date and a short link to
+the definition.
+
+- **Tick** = the passage supports the sentence.
+- **Warning mark** = it supports it only partly.
+- Anything that fails = removed, or marked **"Not verified"**.
+- **Per citation, never one badge for the whole answer.**
+
+Full "means / does not mean" table: [CITATION-VERIFIER.md](CITATION-VERIFIER.md).
+
+## Standing notices
+
+| Where | Notice |
+|---|---|
+| Every answer, stats page and Act page | KanoonBuddy gives **information, not legal advice** |
+| When Jev's safety check flags a personal-advice question | The answer **opens** by saying it cannot advise on the user's own situation, and suggests consulting an advocate |
+| Every result, stats page, Act page and share card | The **data-as-of date** |
+| Every result, stats page, Act page and share card | `Data: Open India Law by Vaquill AI, CC BY 4.0` |
+| Every Act result whose `act_status` is empty | **"in-force status not checked"** |
+| Before upload | A warning about privileged material |
+| High Court answers (phase 2) | No citation string is shown — `citation` is 0.0% filled for High Courts |
+
+## Copy rules
+
+- **Plain words.** The audience includes students and the general public, not only lawyers.
+- Sample content is labelled **"Sample"**.
+- **Never name an advocate** on any page, share card or statistic (BCI Rule 36).
+- **Never show judge or party names** — those fields failed the audit.
+- Outcome statistics are **descriptive**. Never "likely to win", "chances" or any prediction.
+- No customer logos, testimonials, uptime or security claims until they exist.
+- Competitors are not named in product copy.
+- Usage limits are shown as **plain numbers** ("100 research answers a month"), never credits.
+
+## Consent and legal documents
+
+The consent notice is **versioned** — `consents.notice_version` in the database points at a
+specific document. Those documents live in [`../legal/`](../legal/) and must exist before
+sign-up works.

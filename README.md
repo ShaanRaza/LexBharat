@@ -29,14 +29,18 @@ KanoonBuddy gives legal information, **not legal advice**.
 ```
 web/          Next.js + TypeScript + Tailwind website (PWA)
 api/          FastAPI app — routes only
-core/         pipeline steps: search, rerank, answer, verify
+core/         pipeline steps: search, rerank, answer, verify (+ prompts/)
 adapters/     one file per outside service
 workers/      background jobs: OCR, indexing uploads
-data/         scripts to build kanoon_v1 from parquet + Qdrant
+data/         scripts to build the launch collection from parquet + Qdrant
 knowledge/    OKF knowledge notes (reviewed Markdown)
 evals/        200-question test set and scorer
+tests/        unit and integration tests
+migrations/   Alembic — numbered, reversible
 infra/        docker-compose, deploy scripts
+legal/        versioned consent notice, privacy policy, terms
 docs/         specs and reference
+.github/      PR template; CI workflows go in .github/workflows/
 ```
 
 ## Documentation
@@ -55,20 +59,42 @@ review key).
 
 ### Working docs
 
+**Product**
+
+| Document | Covers |
+|---|---|
+| [docs/PRODUCT.md](docs/PRODUCT.md) | Problem, goals, users, MVP scope, plans and pricing, go-to-market, naming |
+| [docs/ROADMAP.md](docs/ROADMAP.md) | Phases, effort estimates, the data refresh plan |
+| [docs/METRICS.md](docs/METRICS.md) | Success metrics, the launch gate, the validation plan |
+| [docs/UX-COPY.md](docs/UX-COPY.md) | Failure states, badge wording, standing notices, copy rules |
+| [docs/RISKS.md](docs/RISKS.md) | Combined risk register with mitigations |
+
+**Engineering**
+
 | Document | Covers |
 |---|---|
 | [CLAUDE.md](CLAUDE.md) | Rules for coding agents: scope, the seven rules, hard limits |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | The 11-step pipeline, stack by layer, search, Jev, uploads |
-| [docs/DECISIONS.md](docs/DECISIONS.md) | Settled and open decisions, each with what settles it |
+| [docs/DECISIONS.md](docs/DECISIONS.md) | **Top 5 questions before any code**, plus settled and open decisions |
+| [docs/DATASET.md](docs/DATASET.md) | What the corpus holds, the audit, field quality, licence, Vaquill |
 | [docs/DATA-MODEL.md](docs/DATA-MODEL.md) | 17 PostgreSQL tables, 2 Qdrant collections |
 | [docs/API.md](docs/API.md) | v1 routes, error format, SSE contract |
 | [docs/CITATION-VERIFIER.md](docs/CITATION-VERIFIER.md) | The four checks; what the tick means and does not |
 | [docs/BUILD-ORDER.md](docs/BUILD-ORDER.md) | 11 build steps and the launch gate |
-| [docs/SECURITY-AND-COMPLIANCE.md](docs/SECURITY-AND-COMPLIANCE.md) | DPDP, BCI Rule 36, security, uploads |
 | [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md) | Config contract and feature switches |
-| [docs/TESTING.md](docs/TESTING.md) | Must-pass list and the 200-question test set |
+| [docs/TESTING.md](docs/TESTING.md) | Must-pass list, CI, and the 200-question test set |
+| [docs/RUNBOOK.md](docs/RUNBOOK.md) | Rebuild plan, backups, monitoring, release checklist, incidents |
 | [docs/GLOSSARY.md](docs/GLOSSARY.md) | Every term, in plain words |
 | [knowledge/index.md](knowledge/index.md) | How OKF knowledge notes work |
+
+**Legal and compliance**
+
+| Document | Covers |
+|---|---|
+| [docs/SECURITY-AND-COMPLIANCE.md](docs/SECURITY-AND-COMPLIANCE.md) | DPDP, BCI Rule 36, privilege, security, uploads |
+| [docs/RETENTION.md](docs/RETENTION.md) | Retention per data type — **undecided, needs counsel** |
+| [docs/BREACH-PLAYBOOK.md](docs/BREACH-PLAYBOOK.md) | The 72-hour plan — **skeleton** |
+| [legal/README.md](legal/README.md) | The user-facing documents that must exist before sign-up |
 
 ## Evidence labels
 
@@ -89,6 +115,11 @@ cp .env.example .env     # then fill it in — see docs/ENVIRONMENT.md
 Nothing is scaffolded yet. The first thing to build is **build step 1 (data)** and then
 **step 2 (the pipeline in a script)** — the riskiest parts first. See
 [docs/BUILD-ORDER.md](docs/BUILD-ORDER.md).
+
+Before writing much code, read the **top 5 open questions** in
+[docs/DECISIONS.md](docs/DECISIONS.md). Several of them are not engineering work — 20 user
+interviews, a 100-judgment hand check, and conversations with counsel and with Vaquill —
+and their answers change the plan.
 
 ## Status
 

@@ -32,6 +32,15 @@ answer. Everything below exists to protect that.
 Data is a frozen snapshot, **v2026.08**. There is no refresh pipeline in v1. Every result,
 stats page and Act page shows its **data-as-of date**.
 
+### Naming — everything is a placeholder
+
+The product name, the collection name `kanoon_v1` and the folder name `kanoonbuddy/` are
+**all placeholders**, pending a trademark search. Each lives in **one config value**
+(`PRODUCT_NAME`, `CORPUS_COLLECTION`), so renaming is a config change, not a code change.
+
+- **Never hard-code a product or collection name.** Read it from config.
+- **Prefer neutral internal names in anything new** — `research_v1`, not a brand word.
+
 ---
 
 ## 2. The seven rules that keep it changeable
@@ -64,13 +73,18 @@ These are the architecture. Breaking one is a bug, even if tests pass.
 web/          Next.js + TypeScript + Tailwind website (PWA)
 api/          FastAPI app — routes only, no business logic
 core/         pipeline steps: search, rerank, answer, verify
+core/prompts/ prompt templates, as files
 adapters/     one file per outside service
 workers/      background jobs: OCR, indexing uploads (ARQ)
-data/         scripts to build kanoon_v1 from parquet + Qdrant
+data/         scripts to build the launch collection from parquet + Qdrant
 knowledge/    OKF knowledge notes (reviewed Markdown files)
 evals/        200-question test set and scorer
+tests/        unit and integration tests
+migrations/   Alembic — numbered, reversible
 infra/        docker-compose, deploy scripts
+legal/        versioned consent notice, privacy policy, terms
 docs/         PRD, Tech Stack, architecture, decisions
+.github/      PR template; CI and deploy workflows go in .github/workflows/
 ```
 
 Business logic lives in `core/`, never in `api/` route handlers.
@@ -160,6 +174,18 @@ as stored, labelled "as recorded in the dataset".
 - Delete means **hard delete**: file from S3, extracted text from PostgreSQL, all vectors
   from Qdrant by `document_id`, in one job, logged, with a nightly leftover check.
 
+### Data you must not trust
+- **Never display judges or party names.** `judges` is 32.7% filled and sampled values were
+  extraction garbage; `petitioner`/`respondent` are 99.9% filled but often counsel names or
+  sentence fragments (Measured).
+- **Show the in-force flag only where `act_status` is filled** — it covers 1,568 of 22,264
+  acts. Label every other Act result "in-force status not checked".
+- **High Courts have no citation strings** (0.0% filled). The verifier falls back to record
+  existence and quoted text, and High Court answers show no citation string.
+- **Never compete on document counts.** `case_id` is not one per case — Rajasthan has
+  1,056,767 `case_id` against 308,342 distinct `case_number`.
+- Full field-quality table: [`docs/DATASET.md`](docs/DATASET.md).
+
 ### Legal and regulatory
 - **Not legal advice.** Every answer, stats page and Act page carries the notice. When
   Jev's safety check flags a personal-advice question, the answer opens by saying it cannot
@@ -239,14 +265,25 @@ things expected to break first on a 16 GB server.
 
 | Question | File |
 |---|---|
+| **What must be answered before writing code?** | [`docs/DECISIONS.md`](docs/DECISIONS.md) — top 5 |
 | How does an answer get produced? | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) |
 | What was decided, and what is still open? | [`docs/DECISIONS.md`](docs/DECISIONS.md) |
+| Who is this for, what ships, what does it cost? | [`docs/PRODUCT.md`](docs/PRODUCT.md) |
+| **Can I trust this field?** | [`docs/DATASET.md`](docs/DATASET.md) |
 | What tables and collections exist? | [`docs/DATA-MODEL.md`](docs/DATA-MODEL.md) |
 | What routes exist, and what shape? | [`docs/API.md`](docs/API.md) |
 | How does verification work in detail? | [`docs/CITATION-VERIFIER.md`](docs/CITATION-VERIFIER.md) |
+| **What exactly does the user see when something fails?** | [`docs/UX-COPY.md`](docs/UX-COPY.md) |
 | What do I build next? | [`docs/BUILD-ORDER.md`](docs/BUILD-ORDER.md) |
+| When does this ship? | [`docs/ROADMAP.md`](docs/ROADMAP.md) |
+| What are we measuring, and what gates launch? | [`docs/METRICS.md`](docs/METRICS.md) |
+| What could go wrong? | [`docs/RISKS.md`](docs/RISKS.md) |
 | What are the legal constraints? | [`docs/SECURITY-AND-COMPLIANCE.md`](docs/SECURITY-AND-COMPLIANCE.md) |
+| How long do we keep data? | [`docs/RETENTION.md`](docs/RETENTION.md) |
+| Something leaked — what now? | [`docs/BREACH-PLAYBOOK.md`](docs/BREACH-PLAYBOOK.md) |
+| The server is down / how do I deploy? | [`docs/RUNBOOK.md`](docs/RUNBOOK.md) |
 | What config does this need? | [`docs/ENVIRONMENT.md`](docs/ENVIRONMENT.md) |
 | What must pass before I ship? | [`docs/TESTING.md`](docs/TESTING.md) |
 | What does this word mean? | [`docs/GLOSSARY.md`](docs/GLOSSARY.md) |
 | How do knowledge notes work? | [`knowledge/index.md`](knowledge/index.md) |
+| What legal documents are missing? | [`legal/README.md`](legal/README.md) |

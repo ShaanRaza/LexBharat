@@ -83,3 +83,44 @@ privacy page.
 - **No staff access by default.** The audit log records who opened or deleted what — never
   the document text.
 - A warning before upload about privileged material.
+
+## Privilege
+
+- **Section 132 of the Bharatiya Sakshya Adhiniyam 2023** covers professional
+  communications between an advocate and client. Reports on a Supreme Court ruling
+  (November 2025) say digital data revealing legal advice on an advocate's device is
+  protected. The PRD's author could not open the judgment or the statute text.
+- Privilege belongs to the **client and advocate**, not to KanoonBuddy. But uploading
+  privileged material to a third-party tool **might be argued to weaken it**, and no clear
+  authority was found either way. **Needs verification: ask counsel before accepting
+  uploads.**
+- **Third parties in uploads.** Uploaded documents name opposing parties and witnesses who
+  never agreed to anything. **Needs counsel.**
+- Design for it regardless: no staff access by default, no training on uploads, an optional
+  mode that deletes the upload when the session ends, a warning before upload, and a
+  written policy for **how we answer legal orders**.
+
+## The PN Vignesh point
+
+BCI Rule 36 binds advocates, not software vendors. But in the **PN Vignesh** case the
+Madras High Court held that platforms which filter or rank lawyers helped unlawful
+solicitation, and asked the BCI to act against **both the platforms and the advocates**.
+
+That is why "no listing, ranking, matching or recommending advocates" is a hard product
+rule here and not just marketing guidance.
+
+Whether AI answers to **non-lawyers** raise a practice-of-law issue also **needs counsel** —
+the free tier will be read by non-lawyers.
+
+## Takedown and redaction
+
+The dataset card says victim names and contact details are already removed from the source
+data. We still need **our own takedown request process**, and the card names
+`contact@vaquill.ai` for redaction requests against the source. Draft the process in
+[`../legal/`](../legal/).
+
+## Related
+
+- [RETENTION.md](RETENTION.md) — the per-type retention schedule, still undecided
+- [BREACH-PLAYBOOK.md](BREACH-PLAYBOOK.md) — the 72-hour plan
+- [`../legal/`](../legal/) — the documents users actually see
