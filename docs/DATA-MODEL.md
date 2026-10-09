@@ -1,0 +1,98 @@
+# Data model
+
+**17 PostgreSQL tables and 2 Qdrant collections** in v1.
+
+Conventions: IDs are UUIDs; every table has `created_at` and `updated_at`. **There is no
+password column anywhere** — Firebase holds passwords and these tables point to the
+Firebase user ID. Drafting and sandbox tables from the architecture doc are added when
+those features are built.
+
+## Accounts and billing
+
+| Table | Key fields |
+|---|---|
+| `users` | id, firebase_uid (unique), email, name, role (advocate / student / in-house / other), plan, status |
+| `subscriptions` | id, user_id or organisation_id, plan, seats, razorpay_subscription_id, status, period_start, period_end |
+| `usage_daily` | user_id, date, feature, requests, tokens_in, tokens_out, cost_estimate |
+| `organisations` | id, name, owner_user_id, plan (chambers, ₹299 per user a month), seats (minimum 3) |
+| `memberships` | organisation_id, user_id, role (admin / member), status (invited / active / removed) |
+| `consents` | id, user_id, notice_version, purpose, given_at, withdrawn_at |
+
+## Conversations and trust
+
+| Table | Key fields |
+|---|---|
+| `conversations` | id, user_id, module (research / document), document_id (if any), title, rolling_summary, message_count |
+| `messages` | id, conversation_id, role, content, rewritten_query, model, tokens_in, tokens_out, latency_ms, from_cache, scope, route (easy/hard), safety, jev_used |
+| `message_sources` | message_id, source_id (S1–S8), record_id, chunk_id, rank, rerank_score, verified (yes/no), relevance (from the Jev gate), support (supports / partly / does not), support_confidence |
+| `invented_citation_log` | id, message_id, query, model, cited_text, reason (not retrieved / record missing / quote not found / claim not supported) |
+| `feedback` | message_id, user_id, rating, reason, comment |
+
+`invented_citation_log` is the trust metric's source. The rate of answers with a removed
+citation is a **launch metric: target under 0.5%**, shown on the admin page and checked on
+every release against the 200-question test set.
+
+## Uploads
+
+| Table | Key fields |
+|---|---|
+| `documents` | id, user_id, filename, mime_type, size_bytes, page_count, status (uploaded / extracting / indexing / ready / failed), fail_reason, ocr_used, storage_path, expires_at, deleted_at |
+| `document_chunks` | id, document_id, page_no, char_start, char_end, text, vector_id |
+
+`page_no`, `char_start` and `char_end` are what let a citation jump to and highlight the
+exact passage in the viewer. Do not drop them.
+
+## Corpus copy for fast reading
+
+Loaded once from parquet with DuckDB. The Supreme Court is small enough to sit in
+PostgreSQL; High Courts in Phase 2 may be too large and may have to be served from parquet
+or S3 instead (Needs verification).
+
+| Table | Key fields |
+|---|---|
+| `cases` | record_id, title, court, decision_date, case_number, citation, disposition (raw), outcome_label (allowed / partly allowed / dismissed / disposed of / other), is_final_outcome, outcome_checked (in the hand-check sample), pdf_url, full_text |
+| `act_sections` | record_id, act_name, act_year, section_number, section_title, text, in_force, act_status, source_url |
+| `court_coverage` | court, snapshot_version, data_as_of, points, live (yes/no), stats_live (yes/no) |
+
+`court_coverage` holds the **data-as-of date per court**, shown on every result, stats page
+and Act page.
+
+## Records
+
+| Table | Key fields |
+|---|---|
+| `audit_log` | id, user_id, action (login / upload / delete / export / admin view), target_id, ip, request_id, at |
+
+**`audit_log` never stores document text.**
+
+Judges and party names are left out of display everywhere — the PRD's audit found those
+fields unreliable.
+
+## Qdrant collections
+
+| Collection | Vectors | Payload fields used as filters |
+|---|---|---|
+| `kanoon_v1` | dense (voyage-4) + sparse (BM25) | record_id, source_type (judgment / act), court, year, citation, case_number, act_name, section_number, in_force, act_status, outcome_label, is_final_outcome |
+| `user_documents` | dense (voyage-4; free local model as fallback) | user_id, document_id, page_no, char_start, char_end |
+
+**Every query against `user_documents` goes through one shared data-access function that
+always adds the `user_id` filter.** No feature writes its own upload query.
+
+### Building `kanoon_v1`
+
+The local Qdrant holds all 32.5M vectors. v1 needs only the Supreme Court and
+`acts_india`, so build one new, small collection and ship only that:
+
+1. Read Supreme Court points out of `legal_corpus_v1` and `v2` with a court filter, with
+   their vectors (Needs verification: the exact court field name and value).
+2. Read matching chunk text from the parquet files with DuckDB and compute BM25 sparse
+   vectors (fastembed, free, local).
+3. Write both into `kanoon_v1` with two named vectors: dense (the existing voyage-4
+   vectors, **no re-embedding**) and sparse. Copy `acts_india` the same way.
+4. Turn on **scalar quantization** — about a quarter of the memory; keep full vectors on
+   disk.
+5. Snapshot → S3 → restore on the EC2 server, then delete the snapshot file to free disk.
+
+Size (Estimate): `acts_india` is about 1.1M points; SC point count not yet measured.
+At ~13.5 KB per point, `acts_india` + 2–3M SC points ≈ **42–55 GB disk**, and with
+quantization **~4–5 GB memory**.
