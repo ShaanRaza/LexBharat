@@ -75,7 +75,7 @@ Actions deploys to the server.
 | `ci.yml` | **python** — ruff lint, format check, pytest | Every push and PR | Skips until `pyproject.toml` exists (build step 2) |
 | `ci.yml` | **web** — lint, `tsc --noEmit`, build | Every push and PR | Skips until `web/package.json` exists (build step 4) |
 | `deploy.yml` | Deploy to the Mumbai server | **Manual dispatch only** | Skeleton — steps commented out until build step 6 |
-| `dependabot.yml` | Dependency updates (actions, pip, npm, docker) | Weekly | Active; finds nothing until manifests exist |
+| `dependabot.yml` | Dependency updates | Weekly | **github-actions only.** pip, npm and docker are commented out — Dependabot **errors** on a missing manifest rather than finding nothing. Uncomment each as its manifest lands |
 
 The detect-then-skip pattern is deliberate: CI that is red from day one gets ignored. Each
 job turns itself on when its manifest appears.

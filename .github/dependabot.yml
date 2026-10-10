@@ -1,5 +1,8 @@
 # Dependency updates. Required by the Tech Stack's security rules.
-# The pip and npm entries find nothing until those manifests exist.
+#
+# Only ecosystems whose manifest actually exists may be listed: Dependabot
+# ERRORS on a missing manifest, it does not quietly find nothing. Uncomment
+# each block as the build step that creates its manifest lands.
 version: 2
 updates:
   - package-ecosystem: github-actions
@@ -8,20 +11,23 @@ updates:
       interval: weekly
     open-pull-requests-limit: 5
 
-  - package-ecosystem: pip
-    directory: /
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 5
+  # Uncomment at build step 2, once pyproject.toml exists:
+  # - package-ecosystem: pip
+  #   directory: /
+  #   schedule:
+  #     interval: weekly
+  #   open-pull-requests-limit: 5
 
-  - package-ecosystem: npm
-    directory: /web
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 5
+  # Uncomment at build step 4, once web/package.json exists:
+  # - package-ecosystem: npm
+  #   directory: /web
+  #   schedule:
+  #     interval: weekly
+  #   open-pull-requests-limit: 5
 
-  - package-ecosystem: docker
-    directory: /infra
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 5
+  # Uncomment at build step 6, once infra/ holds a Dockerfile or compose file:
+  # - package-ecosystem: docker
+  #   directory: /infra
+  #   schedule:
+  #     interval: weekly
+  #   open-pull-requests-limit: 5
