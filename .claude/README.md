@@ -46,6 +46,46 @@ wrong judge's name on a page.
 | `/where` | Where the build actually stands — what exists, current build step, and which blockers need a person rather than a commit |
 | `/ship` | Pre-deploy gate. Runs the must-pass checks and says ship or do not ship. Never deploys |
 
+## Installed skills worth reaching for here
+
+These are not in this repo — they come from the plugin marketplace and user-level skills.
+Listed so the right one gets used at the right build step instead of being rediscovered.
+
+| Build step | Skill | For |
+|---|---|---|
+| 1 — data | `data-quality-auditor` | The judges/party-name garbage check; reconciling the chunk gap |
+| 1 — data | `senior-data-engineer` | DuckDB over 75 parquet files, building the launch collection |
+| 2 — pipeline | **`rag-architect`** | Chunking, embedding choice, and retrieval evaluation — precision@k, recall@k, NDCG. The plan has no retrieval-quality metric; this supplies one |
+| 2 — pipeline | `llm-cost-optimizer` | Cost per answer and the per-plan margin check, both unmeasured |
+| 2 — pipeline | `prompt-engineer-toolkit` | `core/prompts/` |
+| 3 — API | `api-design-reviewer`, `api-test-suite-builder` | The v1 routes and the SSE contract |
+| 3 — API | `database-schema-designer`, `migration-architect` | 17 tables, Alembic |
+| 4 — web | **`impeccable`** | The website. `docs/KanoonBuddy-Website-Design-Doc-v2.md` is a ready brief |
+| 4 — web | `a11y-audit` | Advocates on phones, weak networks |
+| 6 — server | `aws-solution-architect`, `docker-development` | EC2 Mumbai, ARM/Graviton, Compose |
+| 6 — server | `env-secrets-manager`, `observability-designer` | Secrets Manager; Langfuse masking, Sentry scrubbing |
+| 6 — server | `runbook-generator`, `slo-architect` | `docs/RUNBOOK.md` is a stub; the 99.5% target is unrehearsed |
+| 9–10 — beta | **`ux-researcher-designer`** | The 20 validation interviews — the biggest blocker, and not engineering work |
+| 9–10 — beta | `product-discovery` | The assumption table in `docs/METRICS.md` |
+| Any time | `ai-security` | Prompt injection. User questions **and uploaded documents** reach models; a hostile PDF is an attack surface nobody has reviewed |
+| Any time | `tdd-guide`, `adversarial-reviewer` | Rule 6; a second perspective on verifier changes |
+
+### Looks relevant, is not
+
+Reaching for these would produce confidently wrong work:
+
+| Skill | Why not |
+|---|---|
+| `gdpr-dsgvo-expert`, `gdpr-audit-prep` | **EU GDPR, not India's DPDP.** Different consent model, different breach timeline, different roles |
+| `eu-ai-act-specialist`, `ai-act-readiness` | EU regulation; launch is India-only |
+| `stripe-integration-expert` | The product uses **Razorpay** |
+| `kubernetes-operator`, `helm-chart-builder`, `terraform-patterns` | One EC2 box with Docker Compose, by decision |
+| `azure-cloud-architect`, `gcp-cloud-architect` | AWS, Mumbai |
+| `soc2-compliance`, `iso13485-*`, `fda-*`, `mdr-745-*` | Wrong frameworks entirely |
+
+`decision-logger` and `ship-gate` overlap `/decision` and `/ship` above. The local ones know
+this repo's specifics — prefer them.
+
 ## Adding a skill
 
 ```

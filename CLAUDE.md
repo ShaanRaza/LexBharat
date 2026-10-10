@@ -217,7 +217,31 @@ as stored, labelled "as recorded in the dataset".
 
 ---
 
-## 8. How to work here
+## 8. Explain the code as you write it
+
+This product is built solo with AI agents by someone who has to **own and maintain** what
+gets written. Code the owner cannot read is a liability, not an asset — the whole repo is
+one bus-factor away from being unmaintainable.
+
+So, on every non-trivial change:
+
+- **Say what it does in plain words first**, then show the code. Not the other way round.
+- **Name the file and line** — `core/verify.py:42` — so it can be opened and checked.
+- **No unexplained jargon.** If a term is unavoidable, define it in one clause. The Tech
+  Stack has a plain-words glossary for exactly this reason; add to
+  [`docs/GLOSSARY.md`](docs/GLOSSARY.md) rather than assuming the word is known.
+- **Draw anything with a flow.** The pipeline, a request path, a data model, a failure
+  path — a diagram beats three paragraphs. Render it inline rather than describing it.
+- **Say which of the 11 pipeline steps** a change touches, every time.
+- **Show the evidence.** "Tests pass" means the output. "It works" means the thing running.
+  Never claim a check passed that was not run — say "not verified" instead.
+- **Flag the trade-off you made** and what you ruled out, in one line. A choice the owner
+  cannot see is a choice they cannot overrule.
+
+Writing more code faster is not the goal. The goal is a product its owner can defend to an
+advocate, a regulator and the next engineer.
+
+## 9. How to work here
 
 1. Build **one small feature at a time**, each with tests. Run the tests before saying it
    is done.
@@ -250,7 +274,7 @@ docker compose -f infra/docker-compose.yml up    # whole system
 
 ---
 
-## 9. Performance targets
+## 10. Performance targets
 
 | Measure | Target |
 |---|---|
@@ -268,7 +292,7 @@ things expected to break first on a 16 GB server.
 
 ---
 
-## 10. Where to look
+## 11. Where to look
 
 | Question | File |
 |---|---|
