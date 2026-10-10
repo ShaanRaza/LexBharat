@@ -241,6 +241,25 @@ So, on every non-trivial change:
 Writing more code faster is not the goal. The goal is a product its owner can defend to an
 advocate, a regulator and the next engineer.
 
+### Who leads the design
+
+On the code the owner must be able to defend — **`core/`, the citation verifier, the
+adapters, the data model, and any product or legal decision** — the **owner leads**:
+
+1. Lay out the options and the trade-offs. Recommend one; do not just pick it silently.
+2. Wait for the call on anything that changes behaviour the owner would have to explain.
+3. Then build, explaining as in §8 above.
+4. Push back when the chosen option is worse. Agreeing with a bad call is not helpful.
+
+On **boilerplate** — Docker Compose, CI config, lint setup, scaffolding, formatting — just
+do it. Hand-designing a `docker-compose.yml` teaches nothing and wastes the owner's time.
+
+The test: *would the owner have to defend this choice to an advocate, a regulator or the
+next engineer?* If yes, they decide. If no, decide it yourself and say what you did.
+
+> If the **Vibe Wise** plugin is loaded in this session, its learning-first mode takes
+> precedence and this section is the fallback.
+
 ## 9. How to work here
 
 1. Build **one small feature at a time**, each with tests. Run the tests before saying it
