@@ -202,6 +202,11 @@ as stored, labelled "as recorded in the dataset".
 - **Never touch the production server directly.** Push to GitHub; GitHub Actions deploys.
 - **Never commit secrets.** API keys live in AWS Secrets Manager; locally in `.env`, which
   is gitignored. `.env.example` lists names only.
+- **Never print a secret.** Do not `cat`, `echo`, `head` or otherwise display `.env`,
+  `settings.json` or any credentials file. To check a key exists, use
+  `grep -c KEY_NAME file` or test that the variable is set, without showing its value.
+  Redact any secret before it goes into output, a doc or a commit message. (A live API key
+  was once printed this way and had to be rotated.)
 - The server is **ARM (Graviton, r7g)** — every Docker image needs an ARM build.
 
 ---
@@ -271,6 +276,24 @@ next engineer?* If yes, they decide. If no, decide it yourself and say what you 
 5. Facts in docs carry evidence labels — keep them: **Measured**, **Checked**,
    **Dataset card**, **Competitor claim**, **Estimate**, **Needs verification**. Do not
    promote an Estimate to a fact without measuring it.
+6. **Verify before claiming.** Do not state a fact about the dataset, a source, a refresh
+   cadence or a missing field until you have checked it with a command or a file read.
+   Label anything unchecked **"unverified"**. Before writing docs from a long source such as
+   the PRD, read the **whole** document, or summarise it section by section first. (The
+   first docs here were drafted after reading 3 of 59 PRD pages and had to be corrected.)
+
+### Environment
+
+The owner is on **macOS**.
+
+- Use macOS/BSD-compatible commands. There is **no GNU `timeout`** — use `gtimeout`, or a
+  background-and-kill pattern.
+- Give long-running service starts, such as Qdrant, **at least 60 s** before calling them
+  failed.
+- **Never revert a config placeholder** (for example an `API_URL`) after local testing
+  without saying which URL the app will use afterwards.
+- When the owner must run something themselves, give the exact copy-paste command and say
+  **where** to run it: Terminal, or the Claude desktop app.
 
 ### Skills and commands
 
