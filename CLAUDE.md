@@ -350,3 +350,4 @@ things expected to break first on a 16 GB server.
 | How do knowledge notes work? | [`knowledge/index.md`](knowledge/index.md) |
 | What legal documents are missing? | [`legal/README.md`](legal/README.md) |
 | What skills and commands exist here? | [`.claude/README.md`](.claude/README.md) |
+| Which skills did we plan, use or reject? | [`skills-used/README.md`](skills-used/README.md) |

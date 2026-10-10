@@ -40,6 +40,7 @@ migrations/   Alembic — numbered, reversible
 infra/        docker-compose, deploy scripts
 legal/        versioned consent notice, privacy policy, terms
 docs/         specs and reference
+skills-used/  record of which skills were planned, used or rejected
 .github/      PR template; CI workflows go in .github/workflows/
 ```
 

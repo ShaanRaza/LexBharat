@@ -57,7 +57,7 @@ Listed so the right one gets used at the right build step instead of being redis
 | 1 — data | `senior-data-engineer` | DuckDB over 75 parquet files, building the launch collection |
 | 2 — pipeline | **`rag-architect`** | Chunking, embedding choice, and retrieval evaluation — precision@k, recall@k, NDCG. The plan has no retrieval-quality metric; this supplies one |
 | 2 — pipeline | `llm-cost-optimizer` | Cost per answer and the per-plan margin check, both unmeasured |
-| 2 — pipeline | `prompt-engineer-toolkit` | `core/prompts/` |
+| 2 — pipeline | `senior-prompt-engineer` | `core/prompts/` |
 | 3 — API | `api-design-reviewer`, `api-test-suite-builder` | The v1 routes and the SSE contract |
 | 3 — API | `database-schema-designer`, `migration-architect` | 17 tables, Alembic |
 | 4 — web | **`impeccable`** | The website. `docs/KanoonBuddy-Website-Design-Doc-v2.md` is a ready brief |
