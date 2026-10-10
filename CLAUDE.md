@@ -277,7 +277,19 @@ next engineer?* If yes, they decide. If no, decide it yourself and say what you 
 This repo carries its own skills in `.claude/skills/` — they load automatically when they
 fit the work (the verifier, pipeline steps, vendor adapters, corpus fields, uploads,
 knowledge notes). Commands you can type: `/trust-check`, `/decision`, `/where`, `/ship`.
-See [`.claude/README.md`](.claude/README.md).
+
+Installed **marketplace** skills worth reaching for on this project:
+
+- **`rag-architect`** — build step 2. Retrieval evaluation (precision@k, recall@k, NDCG).
+  The plan currently has **no retrieval-quality metric at all**; this supplies one.
+- **`ai-security`** — any time. Prompt injection. User questions **and uploaded documents**
+  reach models, so a hostile PDF is an attack surface nobody has reviewed yet.
+- **`impeccable`** — build step 4. `docs/KanoonBuddy-Website-Design-Doc-v2.md` is a ready brief.
+- **`ux-researcher-designer`** — build steps 9–10. The 20 validation interviews.
+
+Full table, including the ones that **look** relevant but would produce wrong work (the
+GDPR skills — India uses DPDP; Stripe — this uses Razorpay; Kubernetes — this is one box
+with Docker Compose): [`.claude/README.md`](.claude/README.md).
 
 ### Commands
 
