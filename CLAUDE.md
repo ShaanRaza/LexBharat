@@ -229,6 +229,13 @@ as stored, labelled "as recorded in the dataset".
    **Dataset card**, **Competitor claim**, **Estimate**, **Needs verification**. Do not
    promote an Estimate to a fact without measuring it.
 
+### Skills and commands
+
+This repo carries its own skills in `.claude/skills/` — they load automatically when they
+fit the work (the verifier, pipeline steps, vendor adapters, corpus fields, uploads,
+knowledge notes). Commands you can type: `/trust-check`, `/decision`, `/where`, `/ship`.
+See [`.claude/README.md`](.claude/README.md).
+
 ### Commands
 
 Nothing is scaffolded yet — fill these in as you build, and keep them true.
@@ -287,3 +294,4 @@ things expected to break first on a 16 GB server.
 | What does this word mean? | [`docs/GLOSSARY.md`](docs/GLOSSARY.md) |
 | How do knowledge notes work? | [`knowledge/index.md`](knowledge/index.md) |
 | What legal documents are missing? | [`legal/README.md`](legal/README.md) |
+| What skills and commands exist here? | [`.claude/README.md`](.claude/README.md) |
