@@ -34,7 +34,12 @@ Commands, at [`../.claude/commands/`](../.claude/commands/): `/trust-check` · `
 
 ---
 
-## 2. Installed skills — live on your computer, not in this repo
+## 2. Installed skills — shared through `.claude/settings.json`
+
+The `engineering-skills` and `engineering-advanced-skills` plugins are declared in the repo, so
+every teammate's Claude Code offers to install them. `product-skills` is not declared: its
+skills here (`ux-researcher-designer`, `product-discovery`) support Ranveer's work, and he
+doesn't use Claude Code.
 
 Version in brackets is the installed plugin version, checked 10 Oct 2026.
 
@@ -66,7 +71,7 @@ Version in brackets is the installed plugin version, checked 10 Oct 2026.
 
 | Skill | Use it for | Status |
 |---|---|---|
-| `impeccable` (user-level) | The website. [`../docs/KanoonBuddy-Website-Design-Doc-v2.md`](../docs/KanoonBuddy-Website-Design-Doc-v2.md) is a ready brief | Planned |
+| `impeccable` (**copied into the repo**, v4.1.1) | The website. [`../docs/KanoonBuddy-Website-Design-Doc-v2.md`](../docs/KanoonBuddy-Website-Design-Doc-v2.md) is a ready brief | Planned |
 | `a11y-audit` (eng 2.9.0) | Advocates on phones and weak connections | Planned |
 
 ### Build step 6 — server

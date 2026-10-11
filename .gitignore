@@ -34,3 +34,6 @@ qdrant_storage/
 Thumbs.db
 *~
 .idea/
+
+# Personal Claude Code overrides (never shared)
+.claude/settings.local.json

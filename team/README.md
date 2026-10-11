@@ -23,6 +23,19 @@ Separate folders mean nobody edits the same files as anyone else.
 
 If you need to change a file outside your lane, say so in the standup first.
 
+## First-time setup (each builder, once)
+
+1. Your **own** Claude account with Claude Code. Logins are never shared.
+2. Clone the repo and open it in Claude Code. It reads `CLAUDE.md` and the project skills by
+   itself.
+3. When Claude Code offers to install the **`claude-code-skills`** plugins (declared in
+   `.claude/settings.json`), **accept**. They hold the specialist skills the plan refers to
+   (`rag-architect`, `ai-security`, `a11y-audit`, …). The `impeccable` design skill is
+   already inside the repo.
+4. In Terminal, once: `gh auth login` with your own GitHub account. `/start-task` and
+   `/finish-task` use it.
+5. Your own `.env` (copy `.env.example`). Never commit it.
+
 ## One task, one session
 
 Every task is a GitHub issue, sized to finish in **one Claude Code session**.

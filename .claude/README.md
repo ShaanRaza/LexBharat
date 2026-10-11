@@ -46,6 +46,17 @@ wrong judge's name on a page.
 | `/where` | Where the build actually stands — what exists, current build step, and which blockers need a person rather than a commit |
 | `/ship` | Pre-deploy gate. Runs the must-pass checks and says ship or do not ship. Never deploys |
 
+## Shared with the team automatically
+
+- **Project skills and commands** in this folder.
+- **Marketplace plugins** `engineering-skills` and `engineering-advanced-skills`, declared in
+  [`settings.json`](settings.json). Claude Code offers to install them when a teammate opens
+  the repo.
+- **`impeccable`**, copied into [`skills/impeccable/`](skills/impeccable/VENDORED.md) with its
+  Apache 2.0 licence. It doesn't update itself; see its `VENDORED.md`.
+
+Personal overrides go in `settings.local.json`, which git ignores.
+
 ## Installed skills worth reaching for here
 
 These are not in this repo — they come from the plugin marketplace and user-level skills.
