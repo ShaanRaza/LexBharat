@@ -13,6 +13,21 @@ Everyone's detailed task list:
 built, the API answers its first routes, the first screens work on sample data, and the
 legal requests for uploads are sent.
 
+**Tracking:** every task below is a GitHub issue in the
+[Week 1 milestone](https://github.com/ShaanRaza/LexBharat/milestone/1). **Status lives in the
+issues** (open, in progress, in review, closed). These files hold the detail and the
+reasoning, so don't tick progress in both places.
+
+| Person | Issues |
+|---|---|
+| Shaan | #6 SC counts · #7 practice dataset · #8 streaming format · #9 keys · #15 build collection · #16 check collection · #17 adapters · #18 verifier · #19 wrap week |
+| Akash | #10 Python + CI · #11 Compose + Alembic · #12 API skeleton · #13 tables · #14 routes |
+| Meghna | #20 web app · #21 app shell · #22 chat screen · #23 failure screens · #24 judgment + Act pages |
+| Ranveer | #25 legal opinion · #26 Voyage terms · #27 Vaquill · #28 script + list · #29 interviews · #30 GitHub account |
+
+Every task with a pull request runs as **one Claude session**: `/start-task <number>`, then
+`/finish-task <number>`.
+
 ---
 
 ## How every task in these files is written
