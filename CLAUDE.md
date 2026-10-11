@@ -282,6 +282,11 @@ next engineer?* If yes, they decide. If no, decide it yourself and say what you 
    the PRD, read the **whole** document, or summarise it section by section first. (The
    first docs here were drafted after reading 3 of 59 PRD pages and had to be corrected.)
 
+7. **One task = one GitHub issue = one branch = one pull request = one Claude session.**
+   Start with `/start-task <issue>` and end with `/finish-task <issue>`, which checks the
+   work, opens the pull request and updates the issue. If a task outgrows one session,
+   finish a clean slice and propose a follow-up issue. Don't stretch the session.
+
 ### Environment
 
 The owner is on **macOS**.
@@ -299,7 +304,8 @@ The owner is on **macOS**.
 
 This repo carries its own skills in `.claude/skills/` — they load automatically when they
 fit the work (the verifier, pipeline steps, vendor adapters, corpus fields, uploads,
-knowledge notes). Commands you can type: `/trust-check`, `/decision`, `/where`, `/ship`.
+knowledge notes). Commands you can type: `/start-task`, `/finish-task`, `/trust-check`,
+`/decision`, `/where`, `/ship`.
 
 Installed **marketplace** skills worth reaching for on this project:
 

@@ -23,6 +23,19 @@ Separate folders mean nobody edits the same files as anyone else.
 
 If you need to change a file outside your lane, say so in the standup first.
 
+## One task, one session
+
+Every task is a GitHub issue, sized to finish in **one Claude Code session**.
+
+```
+/start-task 12     Claude reads issue #12, makes the branch, explains the plan, waits for your yes
+   ... build ...
+/finish-task 12    Claude runs the checks for real, opens the PR ("Closes #12"),
+                   ticks the verified items and comments a summary on the issue
+```
+
+Start the next task in a **new** session. Shaan merges the PR, which closes the issue.
+
 ## How work reaches `main`
 
 `main` belongs to Shaan. **Nobody else pushes to it.**
