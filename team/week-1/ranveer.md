@@ -150,7 +150,7 @@ Reaction to the ticks:
 Would upload client documents?  Why / why not:
 Language:
 Price reaction:
-Open to the January beta?
+Open to early access?
 ```
 
 **Never write down** names, phone numbers, emails, firm names or anything that identifies
