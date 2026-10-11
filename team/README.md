@@ -72,6 +72,7 @@ particular:
 - If you use Claude Code, it reads `CLAUDE.md` automatically. Read §1, §5 and §6 yourself
   once.
 
-## Weekly plans
+## Plans
 
-- [Week 1: 13 to 17 Oct](WEEK-1.md)
+- [**V1 plan**: all 16 weeks to the private beta](V1-PLAN.md)
+- [Week 1: 13 to 17 Oct](WEEK-1.md) (day by day)
