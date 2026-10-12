@@ -144,11 +144,14 @@ collection around it.
 
 ### Weeks 9 to 11: make it trustworthy, then hand it over
 
+Detail in [MONTH-3.md](MONTH-3.md), which adds four things this table missed: an **admin page**,
+**invite-only sign-up**, a **simple landing page** and **holiday cover**.
+
 | Week | Shaan | Akash | Meghna | Ranveer |
 |---|---|---|---|---|
-| **9** | **Second full 200-question run.** Mark advocate-approved notes `reviewed`. Hostile review of the verifier and isolation (`adversarial-reviewer`) | **Rehearse rebuilding the server from backup, and time it** (target under 1 hour); write it into the runbook. Speed checks on the server (first word under 3 s; upload-ready times). Confirm masking and scrubbing on the live server | **Bug bash 1** on the server: every screen, on a phone and a laptop. Fix what's found | Legal documents live. Beta onboarding guide (with Meghna). Trademark result |
-| **10** | **Final 200-question run.** Beta go/no-go checklist (below). Finish the breach playbook | Production fixes. Set the uploads switch per the go/no-go decision. Alerts for errors and downtime | **Bug bash 2.** Welcome and onboarding screens. Feedback form wired up | Beta invites drafted. Book kickoff calls for 4 to 8 Jan |
-| **11** *(Christmas)* | **Buffer.** Catch up what slipped. No new features | Buffer and fixes | Buffer and fixes | **Send the beta invites** |
+| **9** | **Second full 200-question run.** Mark advocate-approved notes `reviewed`. Hostile review of the verifier and isolation (`adversarial-reviewer`) *(Daily: [WEEK-9.md](WEEK-9.md))* | **Rehearse rebuilding the server from backup, and time it** (target under 1 hour); write it into the runbook. Speed checks on the server (first word under 3 s; upload-ready times). Confirm masking and scrubbing on the live server | **Bug bash 1** on the server: every screen, on a phone and a laptop. Fix what's found | Legal documents live. Beta onboarding guide (with Meghna). Trademark result |
+| **10** | **Final 200-question run.** Beta go/no-go checklist (below). Finish the breach playbook *(Daily: [WEEK-10.md](WEEK-10.md))* | Production fixes. Set the uploads switch per the go/no-go decision. Alerts for errors and downtime | **Bug bash 2.** Welcome and onboarding screens. Feedback form wired up | Beta invites drafted. Book kickoff calls for 4 to 8 Jan |
+| **11** *(Christmas)* | **Buffer.** Catch up what slipped. No new features *(Daily: [WEEK-11.md](WEEK-11.md))* | Buffer and fixes | Buffer and fixes | **Send the beta invites** |
 
 ---
 
@@ -195,7 +198,7 @@ A proposal. **Shaan decides.**
 ## 8. How this plan stays honest
 
 - **Every Saturday:** compare done vs planned; adjust next week's `WEEK-N.md` and its issues
-  (Weeks 2 to 8 are already written), or write it if it doesn't exist yet.
+  (Weeks 2 to 11 are already written), or write it if it doesn't exist yet.
 - **End of Week 3:** a real re-plan. If it's slipping, move the date or drop from the list in
   §2, **out loud**. Don't quietly squeeze later weeks.
 - **Never** cut the verifier, the isolation tests or the 200-question runs to save time.

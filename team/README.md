@@ -107,6 +107,8 @@ Everything in [`../CLAUDE.md`](../CLAUDE.md) applies to every person and every A
 - [Week 4: 2 to 7 Nov](WEEK-4.md): the whole engine, then the decision point
 - [**Month 2**: Weeks 5 to 8, 9 Nov to 5 Dec](MONTH-2.md): measured, uploads, safety, the real server
   - [Week 5](WEEK-5.md) · [Week 6](WEEK-6.md) · [Week 7](WEEK-7.md) · [Week 8](WEEK-8.md)
+- [**Month 3**: Weeks 9 to 11, 7 to 26 Dec](MONTH-3.md): hardening, MVP done, buffer; the beta from 4 Jan
+  - [Week 9](WEEK-9.md) · [Week 10](WEEK-10.md) · [Week 11](WEEK-11.md)
 
-Weeks 2 to 8 were written ahead of time. Each Saturday they're adjusted to what really got
+Weeks 2 to 11 were written ahead of time. Each Saturday they're adjusted to what really got
 done, and the GitHub issues change with them.
