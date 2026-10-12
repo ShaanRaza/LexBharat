@@ -20,7 +20,9 @@ KanoonBuddy gives legal information, **not legal advice**.
 | If you are | Read |
 |---|---|
 | A coding agent | **[CLAUDE.md](CLAUDE.md)** — first, every session |
-| Picking up the build | [docs/BUILD-ORDER.md](docs/BUILD-ORDER.md) |
+| A new teammate | **[team/README.md](team/README.md)** — your lane, first-time setup, how work reaches `main` |
+| Looking for today's task | **[This week's issues](https://github.com/ShaanRaza/LexBharat/milestones)** — status lives there, not in the files |
+| Picking up the build | [docs/BUILD-ORDER.md](docs/BUILD-ORDER.md) and the [V1 plan](team/V1-PLAN.md) |
 | Trying to understand the system | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |
 | Wondering why something is the way it is | [docs/DECISIONS.md](docs/DECISIONS.md) |
 
@@ -41,9 +43,22 @@ infra/        docker-compose, deploy scripts
 legal/        versioned consent notice, privacy policy, terms
 docs/         specs and reference
 skills-used/  record of which skills were planned, used or rejected
-team/         who works on what, branch rules, weekly plans
-.github/      PR template; CI workflows go in .github/workflows/
+team/         who works on what, branch rules, the V1 plan, weekly plans
+.claude/      project skills, slash commands, shared plugin settings
+.github/      PR template, CI and deploy workflows, Dependabot
 ```
+
+## Team
+
+| Person | Lane |
+|---|---|
+| Shaan | **Data + Core**: search, the answer pipeline, the citation verifier. Reviews and merges |
+| Akash | **Platform**: API, database, sign-in, server, the upload backend |
+| Meghna | **Web**: every screen people see |
+| Ranveer | **Lawyers + Outreach**: interviews, the advocate, counsel, Vaquill, beta users |
+
+Each lane owns its own folders. Details, hours and the daily standup:
+[team/README.md](team/README.md).
 
 ## Documentation
 
@@ -98,6 +113,16 @@ review key).
 | [docs/BREACH-PLAYBOOK.md](docs/BREACH-PLAYBOOK.md) | The 72-hour plan — **skeleton** |
 | [legal/README.md](legal/README.md) | The user-facing documents that must exist before sign-up |
 
+**Team and planning**
+
+| Document | Covers |
+|---|---|
+| [team/README.md](team/README.md) | People, lanes, first-time setup, one task per session, standup |
+| [team/V1-PLAN.md](team/V1-PLAN.md) | 11 weeks to the MVP: what's in, what moved to January, the drop order |
+| [team/WEEK-1.md](team/WEEK-1.md) | Week 1 on one screen; per-person detail in [team/week-1/](team/week-1/README.md) |
+| [.claude/README.md](.claude/README.md) | Project skills and slash commands, and which marketplace skills to use |
+| [skills-used/README.md](skills-used/README.md) | Which skills were planned, used or rejected |
+
 ## Evidence labels
 
 Facts in these docs carry one of six labels, used consistently. Keep them; do not promote
@@ -110,13 +135,30 @@ inputs) · **Needs verification** (not confirmed, with how to confirm it)
 
 ## Getting set up
 
+Follow the **first-time setup** in [team/README.md](team/README.md). In short: your own
+Claude Code account, accept the plugins Claude Code offers when you open the repo,
+`gh auth login`, and your own `.env`:
+
 ```bash
 cp .env.example .env     # then fill it in — see docs/ENVIRONMENT.md
 ```
 
-Nothing is scaffolded yet. The first thing to build is **build step 1 (data)** and then
-**step 2 (the pipeline in a script)** — the riskiest parts first. See
-[docs/BUILD-ORDER.md](docs/BUILD-ORDER.md).
+## How a task gets done
+
+Every task is a GitHub issue, sized for **one Claude Code session**:
+
+```
+/start-task 12     read issue #12, make the branch, explain the plan, wait for a yes
+   ... build ...
+/finish-task 12    run the checks for real, open the PR ("Closes #12"), update the issue
+```
+
+Shaan reviews and merges; merging closes the issue. Nobody else pushes to `main`.
+
+Nothing is scaffolded yet. Week 1 builds the foundations in parallel: the Supreme Court
+collection and the verifier's free checks (Shaan), the Python project, Docker Compose and
+database (Akash), and the Next.js app and chat screen on a fake stream (Meghna). See
+[team/WEEK-1.md](team/WEEK-1.md).
 
 Before writing much code, read the **top 5 open questions** in
 [docs/DECISIONS.md](docs/DECISIONS.md). Several of them are not engineering work — 20 user
@@ -125,7 +167,11 @@ and their answers change the plan.
 
 ## Status
 
-Pre-launch. Pricing, launch courts, upload limits and the product name are all still open;
-see [docs/DECISIONS.md](docs/DECISIONS.md). Nothing here is a public commitment.
+Pre-launch. **Week 1 of 11** (13 to 17 Oct 2026). Internal targets: MVP finished by
+**Sat 26 Dec 2026**, private beta from **Mon 4 Jan 2027** — see
+[team/V1-PLAN.md](team/V1-PLAN.md).
+
+Pricing, upload limits and the product name are still open; see
+[docs/DECISIONS.md](docs/DECISIONS.md). Nothing here is a public commitment.
 
 Data: Open India Law by Vaquill AI, CC BY 4.0.
