@@ -84,6 +84,8 @@ migrations/   Alembic — numbered, reversible
 infra/        docker-compose, deploy scripts
 legal/        versioned consent notice, privacy policy, terms
 docs/         PRD, Tech Stack, architecture, decisions
+team/         people, lanes, the V1 plan, weekly plans
+after-11-weeks/ the product at the end of the plan, and what comes next
 .github/      PR template; CI and deploy workflows go in .github/workflows/
 ```
 
@@ -381,3 +383,4 @@ things expected to break first on a 16 GB server.
 | What skills and commands exist here? | [`.claude/README.md`](.claude/README.md) |
 | Which skills did we plan, use or reject? | [`skills-used/README.md`](skills-used/README.md) |
 | Who works on what, and how does work reach `main`? | [`team/README.md`](team/README.md) |
+| What does the product look like after 11 weeks, and what's next? | [`after-11-weeks/`](after-11-weeks/README.md) |

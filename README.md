@@ -23,6 +23,7 @@ KanoonBuddy gives legal information, **not legal advice**.
 | A new teammate | **[team/README.md](team/README.md)** — your lane, first-time setup, how work reaches `main` |
 | Looking for today's task | **[This week's issues](https://github.com/ShaanRaza/LexBharat/milestones)** — status lives there, not in the files |
 | Picking up the build | [docs/BUILD-ORDER.md](docs/BUILD-ORDER.md) and the [V1 plan](team/V1-PLAN.md) |
+| Wondering where this ends up | [after-11-weeks/](after-11-weeks/README.md): the product on 4 Jan 2027, and what comes next |
 | Trying to understand the system | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |
 | Wondering why something is the way it is | [docs/DECISIONS.md](docs/DECISIONS.md) |
 
@@ -44,6 +45,7 @@ legal/        versioned consent notice, privacy policy, terms
 docs/         specs and reference
 skills-used/  record of which skills were planned, used or rejected
 team/         who works on what, branch rules, the V1 plan, weekly plans
+after-11-weeks/ the product at the end of the plan, and what comes next
 .claude/      project skills, slash commands, shared plugin settings
 .github/      PR template, CI and deploy workflows, Dependabot
 ```
