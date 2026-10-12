@@ -101,4 +101,10 @@ Everything in [`../CLAUDE.md`](../CLAUDE.md) applies to every person and every A
 ## Plans
 
 - [**V1 plan**: 11 weeks to the MVP, beta from early January](V1-PLAN.md)
-- [Week 1: 13 to 17 Oct](WEEK-1.md) (day by day)
+- [Week 1: 13 to 17 Oct](WEEK-1.md): start everything
+- [Week 2: 19 to 24 Oct](WEEK-2.md): search works
+- [Week 3: 26 to 31 Oct](WEEK-3.md): answers are verified, then the re-plan
+- [Week 4: 2 to 7 Nov](WEEK-4.md): the whole engine, then the decision point
+
+Weeks 2 to 4 were written ahead of time. Each Saturday they're adjusted to what really got
+done, and the GitHub issues change with them.

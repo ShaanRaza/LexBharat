@@ -243,8 +243,9 @@ Check 4 (`claim_not_supported`, via Jev) waits until Week 3.
 ### 5.3 Wrap the week (60 min)
 - [ ] Merge everything that's ready
 - [ ] Tick the "Done means" list in [README.md](README.md); be honest about what isn't
-- [ ] Write `team/WEEK-2.md` from what **actually** got done, using the Week 2 row of
-      [`../V1-PLAN.md`](../V1-PLAN.md)
+- [ ] Adjust [`../WEEK-2.md`](../WEEK-2.md), [`../week-2/`](../week-2/README.md) and the
+      Week 2 issues to what **actually** got done. Unfinished Week 1 work goes first
+- [ ] Open the **Standup: Week 2** issue (label `standup`)
 - [ ] Before unplugging: `docker stop qdrant && colima stop`
 
 ---

@@ -119,7 +119,7 @@ review key).
 |---|---|
 | [team/README.md](team/README.md) | People, lanes, first-time setup, one task per session, standup |
 | [team/V1-PLAN.md](team/V1-PLAN.md) | 11 weeks to the MVP: what's in, what moved to January, the drop order |
-| [team/WEEK-1.md](team/WEEK-1.md) | Week 1 on one screen; per-person detail in [team/week-1/](team/week-1/README.md) |
+| [team/WEEK-1.md](team/WEEK-1.md) to [WEEK-4.md](team/WEEK-4.md) | Each week on one screen; per-person detail in `team/week-N/` |
 | [.claude/README.md](.claude/README.md) | Project skills and slash commands, and which marketplace skills to use |
 | [skills-used/README.md](skills-used/README.md) | Which skills were planned, used or rejected |
 

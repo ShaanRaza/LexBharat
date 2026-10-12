@@ -88,4 +88,4 @@ Every task with a pull request runs as **one Claude session**: `/start-task <num
 - [ ] Chat screen, every failure screen, judgment page and Act page working on sample data
 - [ ] Streaming format written in `docs/API.md`
 - [ ] Legal opinion, Voyage terms and Vaquill emails **sent**; 5 interviews booked
-- [ ] `team/WEEK-2.md` written by Shaan on Saturday
+- [ ] `team/WEEK-2.md` and the Week 2 issues adjusted by Shaan on Saturday
