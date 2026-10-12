@@ -105,6 +105,8 @@ Everything in [`../CLAUDE.md`](../CLAUDE.md) applies to every person and every A
 - [Week 2: 19 to 24 Oct](WEEK-2.md): search works
 - [Week 3: 26 to 31 Oct](WEEK-3.md): answers are verified, then the re-plan
 - [Week 4: 2 to 7 Nov](WEEK-4.md): the whole engine, then the decision point
+- [**Month 2**: Weeks 5 to 8, 9 Nov to 5 Dec](MONTH-2.md): measured, uploads, safety, the real server
+  - [Week 5](WEEK-5.md) · [Week 6](WEEK-6.md) · [Week 7](WEEK-7.md) · [Week 8](WEEK-8.md)
 
-Weeks 2 to 4 were written ahead of time. Each Saturday they're adjusted to what really got
+Weeks 2 to 8 were written ahead of time. Each Saturday they're adjusted to what really got
 done, and the GitHub issues change with them.
