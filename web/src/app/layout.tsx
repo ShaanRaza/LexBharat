@@ -13,7 +13,11 @@ export const metadata: Metadata = {
   description: "Legal research with verified citations",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className={`${jakarta.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">{children}</body>
