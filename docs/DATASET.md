@@ -36,8 +36,9 @@ must use the same model, or the vectors are meaningless.
 ## At launch
 
 Only the **Supreme Court and `acts_india`** are served, from one new collection. Everything
-else is held but not served. Launch size: **42–55 GB of vectors** (Estimate), **4–5 GB of
-memory** with scalar quantization.
+else is held but not served. Launch size: about **6 to 20 GB** (Estimate, from the Measured counts of
+371,159 Supreme Court points and up to 1,098,577 `acts_india` points); memory with scalar
+quantization well under the earlier 4–5 GB estimate (Needs verification by load test).
 
 ## Field quality — read this before trusting any field
 

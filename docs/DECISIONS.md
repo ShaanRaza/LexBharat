@@ -24,14 +24,14 @@ each needs a person, a hand check or a lawyer.**
 ### Other open questions
 
 - Voyage per-query cost and monthly budget on real questions (build step 2).
-- Is the chunk gap ~55,000 or ~1.15M? Needs the weeks 1–2 count, parquet versus Qdrant.
+- Is the chunk gap ~55,000 or ~1.15M? **Partly answered for the Supreme Court** (Measured, 13 Oct 2026): the parquet's 1,113,313 rows are 371,247 English chunks plus translations in 15 languages; Qdrant holds the English ones (371,159, a gap of 88). But Qdrant has 34,954 cases against 35,596 English cases in the parquet (642 missing). Full reconciliation: issue #16.
 - Hindi-first or English-first for the interface and answers?
 - Trademark search on the final name **and** the five alternatives, before any branding spend.
 - Monthly LLM budget per paying user — measure on the 200-question test set.
 - Whether to extract tribunal data after launch (OCR effort, not licensing).
 - Who cleans the High Courts' 577 disposition values, and to what standard? Phase 2.
 - Will TypeSafe grant Jev early access and confirm no-training terms in writing?
-- Supreme Court point count and server size — does SC + `acts_india` fit on r7g.large (16 GB)?
+- Server size — does SC + `acts_india` fit on r7g.large (16 GB)? The counts are now Measured (below); the load test isn't done.
 - Firebase or Supabase — stay until a trigger is hit; decide at each trigger.
 
 ---
@@ -61,6 +61,8 @@ each needs a person, a hand check or a lawyer.**
 | — | Voyage free allowance | Assume 200M tokens once, not monthly | Confirm with Voyage |
 | — | Upload embedding model | voyage-4 first, free local model (bge-m3) as fallback | Depends on Voyage's upload terms and the legal opinion |
 | — | What `DELETE /me` keeps | Payment and invoice records only | Needs counsel to confirm the retention period |
+| — | **Court field in the Qdrant payload** (13 Oct 2026) | `court_type = "supreme_court"` (also `court = "Supreme Court of India"`; both give the same count). Both fields are indexed | **Measured** with `data/inspect_collections.py`. Not `court = supreme_court`, as earlier notes assumed |
+| — | **Supreme Court point count** (13 Oct 2026) | **371,159 points, 34,954 cases, all in `legal_corpus_v2`.** `legal_corpus_v1` has **none** (it's High Courts only). English chunks only; every point has its chunk text in the payload | **Measured.** The search collection is built from `legal_corpus_v2` alone |
 
 ---
 
@@ -69,8 +71,8 @@ each needs a person, a hand check or a lawyer.**
 | Decision | Options | Working choice | What settles it |
 |---|---|---|---|
 | **Final product name** | KanoonBuddy (working) or Praman (PRD's pick) | Undecided | Trademark search with IP India |
-| **Supreme Court point count and server size** | r7g.large (16 GB) or r7g.xlarge (32 GB) | r7g.large | Count points in build step 1; load-test search with quantization |
-| **Court field name in the Qdrant payload** | Unknown | None | Inspect 5 Supreme Court points locally |
+| **Server size** | r7g.large (16 GB) or r7g.xlarge (32 GB) | r7g.large | Counts are Measured: 371,159 SC points + up to 1,098,577 `acts_india` points (fewer if v1 serves Central Acts only). Load-test search with quantization |
+| **What `acts_india` covers in v1** | Central Acts only (74,509 points) / + state Acts (469,714) / + regulations (554,354) | Undecided. CLAUDE.md and the PRD say "Central Acts"; `docs/UX-COPY.md`'s coverage message says "central and state Acts and regulations" | Shaan decides **before the search collection is built (issue #15, Day 3)**. Measured 13 Oct 2026: the collection holds all three (`jurisdiction` facet) |
 | **50-judgment SC pass rule** | How many must match for stats to go live | Undecided | Agree with the advocate **before** checking |
 | **Upload auto-delete period** | 7, 30 or 90 days | Undecided | Advocate's legal opinion |
 | **Upload size and page limits** | e.g. 25 MB and 200 pages | Undecided | OCR time on real scans; what interviewees upload |

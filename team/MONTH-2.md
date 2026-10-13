@@ -91,8 +91,9 @@ only buffer) or down the drop list, said out loud.
 
 ## The two most likely problems
 
-1. **The search collection is large to move.** About 42 to 55 GB (Estimate). Uploading it to
-   S3 from a home connection may take **a day or more**. That's why Shaan starts the upload
-   on **Sat 28 Nov**, not on the day it's needed.
+1. **The search collection has to move from a laptop to the server.** About 6 to 20 GB
+   (Estimate, from the Day 1 counts; depends on how much of `acts_india` v1 serves).
+   Uploading it to S3 from a home connection may take **hours**. That's why Shaan starts the
+   upload on **Sat 28 Nov**, not on the day it's needed.
 2. **OCR is slow on one CPU.** Scans may miss the 5-minute target. Week 6 measures it, and
    the upload limits are set from that measurement, not guessed.

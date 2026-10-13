@@ -55,7 +55,7 @@ must-pass before any deploy from now on.
 
 ## Saturday: the long upload starts
 
-The search collection (about 42 to 55 GB, Estimate) goes to S3 from Shaan's laptop. On a
+The search collection (about 6 to 20 GB, Estimate) goes to S3 from Shaan's laptop. On a
 home connection this may take **a day or more**, and Week 8 needs it on the server by
 Friday. Starting it on Saturday is the plan's safety margin.
 

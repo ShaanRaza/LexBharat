@@ -156,7 +156,8 @@ never typed into the code.
 | Payload indexes | `record_id`, `source_type`, `court`, `year`, `citation`, `case_number`, `act_name`, `section_number`, `in_force`, `act_status` |
 
 Steps the script takes:
-1. Read Supreme Court points **with their vectors** from both collections (court filter).
+1. Read Supreme Court points **with their vectors** from `legal_corpus_v2` only, filter
+   `court_type = "supreme_court"` (371,159 points; v1 has none. Measured on Day 1).
    **No re-embedding**: reuse the stored voyage-4 vectors.
 2. Join each point to its text in the parquet files (DuckDB).
 3. Compute the BM25 vector from the text.
@@ -182,7 +183,8 @@ Run it in the background with `caffeinate -i` so the Mac doesn't sleep, logging 
 ## Day 4, Fri 16 Oct: check the collection
 
 ### 4.1 Did it build correctly? (30 min)
-- [ ] Point count = Supreme Court points (v1 + v2) + 1,098,577 Act points
+- [ ] Point count = 371,159 Supreme Court points + the Act points v1 serves (1,098,577 if
+      all of `acts_india`; 74,509 if Central Acts only: see the open decision)
 - [ ] 5 random points each have a dense vector, a sparse vector, text and payload
 - [ ] Reclaim disk space afterwards (the VM disk never shrinks by itself):
       `colima ssh -- sudo fstrim /var/lib/docker`
