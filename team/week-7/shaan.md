@@ -111,7 +111,7 @@ Don't rubber-stamp it:
 Akash creates the backups bucket by today. Then:
 - Take a **Qdrant snapshot** of the search collection on the SSD
 - Upload it to the S3 backups bucket in Mumbai, with `caffeinate -i` and a log file
-- It's about 42 to 55 GB (Estimate), so **it may take a day or more**. Keep LAWSSD plugged
+- It's about 6 to 20 GB (Estimate), so **it may take hours**. Keep LAWSSD plugged
   in and Colima running until it finishes; check it on Sunday
 - Afterwards: `colima ssh -- sudo fstrim /var/lib/docker`
 

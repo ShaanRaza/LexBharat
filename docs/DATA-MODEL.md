@@ -83,8 +83,9 @@ always adds the `user_id` filter.** No feature writes its own upload query.
 The local Qdrant holds all 32.5M vectors. v1 needs only the Supreme Court and
 `acts_india`, so build one new, small collection and ship only that:
 
-1. Read Supreme Court points out of `legal_corpus_v1` and `v2` with a court filter, with
-   their vectors (Needs verification: the exact court field name and value).
+1. Read Supreme Court points out of **`legal_corpus_v2`** with the filter
+   `court_type = "supreme_court"`, with their vectors: **371,159 points** (Measured,
+   13 Oct 2026). `legal_corpus_v1` holds no Supreme Court points.
 2. Read matching chunk text from the parquet files with DuckDB and compute BM25 sparse
    vectors (fastembed, free, local).
 3. Write both into `kanoon_v1` with two named vectors: dense (the existing voyage-4
@@ -93,6 +94,7 @@ The local Qdrant holds all 32.5M vectors. v1 needs only the Supreme Court and
    disk.
 5. Snapshot → S3 → restore on the EC2 server, then delete the snapshot file to free disk.
 
-Size (Estimate): `acts_india` is about 1.1M points; SC point count not yet measured.
-At ~13.5 KB per point, `acts_india` + 2–3M SC points ≈ **42–55 GB disk**, and with
-quantization **~4–5 GB memory**.
+Size: `acts_india` is 1,098,577 points and the Supreme Court 371,159 (both Measured).
+At ~13.5 KB per point (Estimate), that's about **20 GB of disk** for all of `acts_india`,
+or about **6 GB** if v1 serves Central Acts only (see `DECISIONS.md`). Memory with
+quantization: well under the earlier 4–5 GB estimate (Needs verification by load test).
