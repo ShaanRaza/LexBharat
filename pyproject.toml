@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lexbharat"
+version = "0.1.0"
+description = "LexBharat / KanoonBuddy: AI legal research with verified citations"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic-settings",
+    "sqlalchemy>=2",
+    "alembic",
+    "psycopg[binary]",
+    "redis",
+    "arq",
+    "qdrant-client",
+    "httpx",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "pytest",
+    "pytest-asyncio",
+]
+data = [
+    "duckdb",
+    "pyarrow",
+    "fastembed",
+    "numpy",
+]
+
+[tool.setuptools]
+packages = ["api", "core", "adapters", "workers", "data"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

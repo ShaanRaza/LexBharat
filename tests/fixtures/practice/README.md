@@ -28,8 +28,13 @@ Total size: about 4.4 MB (`du -sh tests/fixtures`).
 import gzip, json
 import numpy as np
 
-chunks = [json.loads(line) for line in gzip.open("tests/fixtures/practice/chunks.jsonl.gz", "rt")]
-vectors = np.load("tests/fixtures/practice/vectors.npy").astype(np.float32)  # float32 for Qdrant
+chunks = [
+    json.loads(line)
+    for line in gzip.open("tests/fixtures/practice/chunks.jsonl.gz", "rt")
+]
+vectors = np.load("tests/fixtures/practice/vectors.npy").astype(
+    np.float32
+)  # float32 for Qdrant
 ```
 
 The `.jsonl` files are gzip-compressed because uncompressed they'd be about 9 MB, over the
